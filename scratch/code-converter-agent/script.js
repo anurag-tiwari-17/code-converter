@@ -168,7 +168,38 @@ Please provide the COMPLETE converted code with all functions and methods includ
 
     } catch (error) {
         console.error('Conversion error:', error);
-        codeOutput.innerHTML = `<div class="placeholder-text" style="color: #ef4444;"><p>❌ Error converting code</p><p class="placeholder-hint">${error.message}</p></div>`;
+
+        // Provide detailed error messages based on error type
+        let userMessage = '❌ Error converting code';
+        let detailMessage = error.message;
+
+        if (error.message.includes('Failed to fetch') || error.name === 'TypeError') {
+            userMessage = '❌ Network Error';
+            detailMessage = `Unable to connect to the Gemini API. This could be due to:
+            
+• Network connectivity issues - Check your internet connection
+• CORS policy - The browser is blocking the request
+• Firewall or proxy settings blocking the API
+• Invalid API endpoint
+
+💡 Try these solutions:
+1. Check your internet connection
+2. Verify the API key is correct in script.js (line 2)
+3. Try using a different network
+4. Check browser console (F12) for detailed error messages
+5. Ensure you're accessing via http://localhost:8000 (not file://)`;
+        } else if (error.message.includes('API Error (403)')) {
+            userMessage = '❌ API Key Error';
+            detailMessage = 'Invalid or unauthorized API key. Please check your Gemini API key in script.js';
+        } else if (error.message.includes('API Error (429)')) {
+            userMessage = '❌ Rate Limit Exceeded';
+            detailMessage = 'You have exceeded the API rate limit. Please wait a few minutes and try again.';
+        }
+
+        codeOutput.innerHTML = `<div class="placeholder-text" style="color: #ef4444;">
+            <p>${userMessage}</p>
+            <p class="placeholder-hint" style="white-space: pre-line; text-align: left; padding: 10px; font-size: 12px;">${detailMessage}</p>
+        </div>`;
     } finally {
         loadingOverlay.classList.remove('active');
     }
