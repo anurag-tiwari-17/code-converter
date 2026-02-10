@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iOS to Android Converter</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 id="app-title">iOS to Android Converter</h1>
+        </div>
+        
+        <div class="control-panel">
+            <button class="btn-import" id="importBtn">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 4V12M10 4L7 7M10 4L13 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M4 12V15C4 15.5304 4.21071 16.0391 4.58579 16.4142C4.96086 16.7893 5.46957 17 6 17H14C14.5304 17 15.0391 16.7893 15.4142 16.4142C15.7893 16.0391 16 15.5304 16 15V12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span id="import-label">Import iOS File</span>
+            </button>
+            <input type="file" id="fileInput" accept=".swift,.kt,.java,.m,.h" style="display: none;">
+            
+            <div class="filename-display" id="filenameDisplay">
+                <span id="filename">iOS File Name</span>
+                <span class="file-ext" id="fileExt">.swift</span>
+            </div>
+            
+            <div class="convert-dropdown">
+                <button class="btn-convert" id="convertBtn">
+                    <span id="convert-label">Convert to Android</span>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <div class="dropdown-item" data-mode="android">Convert to Android</div>
+                    <div class="dropdown-item" data-mode="ios">Convert to iOS</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="result-area" id="resultArea">
+            <div class="result-header">
+                <div class="code-lines">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+                <button class="btn-copy" id="copyBtn">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="7" y="7" width="10" height="10" rx="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        <path d="M3 13V5C3 3.89543 3.89543 3 5 3H13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="code-output" id="codeOutput">
+                <div class="placeholder-text">
+                    <p>Your converted code will appear here</p>
+                    <p class="placeholder-hint">Upload a file and click convert to begin</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="loading-overlay" id="loadingOverlay">
+            <div class="spinner"></div>
+            <p>Converting code...</p>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
